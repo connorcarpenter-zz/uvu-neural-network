@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head> 
+  <body>
+	<b>Data File</b> <input type="file" id="loadData" />
+	<button type="button" id="saveData">Save Data</button>
+	<br><br>
+    <canvas id="myCanvas" width="640" height="540"></canvas>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		var scope = {};
+		scope.currentFileName = "main.html";
+		scope.mainJavascript = "main.js";
+		scope.relativePath = window.location.pathname
+			.replace(scope.currentFileName, "");
+		scope.relativePath = scope.relativePath.substring(1, scope.relativePath.length-1) + "/";
+		$.getScript(scope.relativePath + scope.mainJavascript);
+	</script>
+  </body>
+</html>   
