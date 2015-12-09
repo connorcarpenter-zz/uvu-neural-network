@@ -158,9 +158,9 @@ function ObjText(scope, text) {
 function ObjSampleLabel(scope, sampleSets, index) {
     this.sampleSets = sampleSets;
     this.index = index;
-    this.height = 1 * scope.canvas.cellHeight;
-    this.width = 2 * scope.canvas.cellWidth;
     this.text = sampleSets[index].name;
+    this.height = 1 * scope.canvas.cellHeight;
+    this.width = -1;
     this.children = [];
     this.draw = function (canvas, drawer) {
         var x = drawer.x;
@@ -173,9 +173,13 @@ function ObjSampleLabel(scope, sampleSets, index) {
                 var newName = prompt("Enter new name for this sample set:", this.text);
                 this.text = newName;
                 this.sampleSets[this.index].name = newName;
+                this.width = -1;
             }
         } else {
             canvas.context.fillStyle="#000066";
+        }
+        if (this.width == -1){
+            this.width = canvas.context.measureText(this.text).width + scope.canvas.cellWidth;
         }
         canvas.context.fillText(this.text, x, y);
         drawer.x += this.width;
